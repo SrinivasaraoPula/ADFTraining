@@ -14,7 +14,7 @@
 				"fileName": "salary.xlsx",
 				"container": "input"
 			},
-			"firstRowAsHeader": false
+			"firstRowAsHeader": true
 		},
 		"schema": [
 			{
