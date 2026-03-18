@@ -92,7 +92,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"folderPath": "Sink"
+						"fileSystem": "output"
 					},
 					"compressionCodec": "snappy"
 				},
@@ -114,13 +114,13 @@
 				"annotations": [],
 				"type": "Excel",
 				"typeProperties": {
-					"sheetName": "sheet1",
+					"sheetName": "Sheet1",
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": "salary.xlsx",
 						"container": "input"
 					},
-					"firstRowAsHeader": true
+					"firstRowAsHeader": false
 				},
 				"schema": [
 					{
