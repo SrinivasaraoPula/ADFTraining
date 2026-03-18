@@ -11,11 +11,23 @@
 		"ls_blob_excel_connectionString": {
 			"value": ""
 		},
+		"ls_onprem_sql_password": {
+			"value": ""
+		},
 		"ls_sql_azure_password": {
 			"value": ""
 		},
 		"ls_adls_parquet_properties_typeProperties_url": {
 			"value": "https://adlsgen2storgeac.dfs.core.windows.net/"
+		},
+		"ls_onprem_sql_properties_typeProperties_server": {
+			"value": "LAPTOP-0L80BMJ2"
+		},
+		"ls_onprem_sql_properties_typeProperties_database": {
+			"value": "AdventureWorksLT2019"
+		},
+		"ls_onprem_sql_properties_typeProperties_userName": {
+			"value": "srinu"
 		},
 		"ls_sql_azure_properties_typeProperties_server": {
 			"value": "myserverfortraining.database.windows.net"
