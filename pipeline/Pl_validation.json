@@ -70,7 +70,10 @@
 				"outputs": [
 					{
 						"referenceName": "ds_azure_sql",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Tablename": "salary"
+						}
 					}
 				]
 			}
