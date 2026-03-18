@@ -12,8 +12,9 @@
 				"type": "AzureBlobFSLocation",
 				"fileSystem": "output"
 			},
-			"compressionCodec": "snappy"
+			"compressionCodec": "none"
 		},
 		"schema": []
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }
