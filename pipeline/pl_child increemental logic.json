@@ -28,11 +28,11 @@
 						"referenceName": "ds_lookup_maxvalue",
 						"type": "DatasetReference",
 						"parameters": {
-							"tablename": {
+							"TableName": {
 								"value": "@pipeline().parameters.TableName",
 								"type": "Expression"
 							},
-							"schemaname": {
+							"SchemaName": {
 								"value": "@pipeline().parameters.TableSchema",
 								"type": "Expression"
 							}
@@ -105,11 +105,11 @@
 									"referenceName": "ds_lookup_maxvalue",
 									"type": "DatasetReference",
 									"parameters": {
-										"tablename": {
+										"TableName": {
 											"value": "@pipeline().parameters.TableName",
 											"type": "Expression"
 										},
-										"schemaname": {
+										"SchemaName": {
 											"value": "@pipeline().parameters.TableSchema",
 											"type": "Expression"
 										}
@@ -182,6 +182,11 @@
 			},
 			"LastLoadValue": {
 				"type": "string"
+			}
+		},
+		"variables": {
+			"var": {
+				"type": "String"
 			}
 		},
 		"folder": {
