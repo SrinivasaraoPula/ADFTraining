@@ -21,7 +21,14 @@
 					{
 						"name": "Lookup_maxvalue",
 						"type": "Lookup",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Set variable1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "0.12:00:00",
 							"retry": 0,
@@ -34,7 +41,7 @@
 							"source": {
 								"type": "SqlServerSource",
 								"sqlReaderQuery": {
-									"value": "SELECT MAX(@{pipeline().parameters.WatermarkColumn}) AS MaxValue\nFROM @{pipeline().parameters.TableSchema}.@{pipeline().parameters.TableName}\n",
+									"value": "@concat(\n  'SELECT MAX(', pipeline().parameters.WatermarkColumn, ') AS MaxValue FROM ',\n  pipeline().parameters.TableSchema, '.', pipeline().parameters.TableName\n)",
 									"type": "Expression"
 								},
 								"queryTimeout": "02:00:00",
@@ -71,7 +78,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"expression": {
-								"value": "@or(equals(pipeline().parameters.LastLoadValue,null),greater(int(activity('Lookup_maxvalue').output.firstRow.MaxValue),int(pipeline().parameters.LastLoadValue)))",
+								"value": "@or(equals(pipeline().parameters.LastLoadValue, null), greater(int(activity('Lookup_maxvalue').output.firstRow.MaxValue), int(pipeline().parameters.LastLoadValue)))",
 								"type": "Expression"
 							},
 							"ifTrueActivities": [
@@ -91,7 +98,7 @@
 										"source": {
 											"type": "SqlServerSource",
 											"sqlReaderQuery": {
-												"value": "@concat('select * from ',pipeline().parameters.TableSchema,'.',pipeline().parameters.TableName,\nif(equals(pipeline().parameters.LastLoadValue,null),'',\nconcat( ' where ',pipeline().parameters.WatermarkColumn,'> ''',pipeline().parameters.LastLoadValue)))",
+												"value": "@concat(\n    'SELECT * FROM ',\n    pipeline().parameters.TableSchema, '.', pipeline().parameters.TableName,\n    if(\n        equals(pipeline().parameters.LastLoadValue, null),\n        '', \n        concat(\n            ' WHERE ', pipeline().parameters.WatermarkColumn,\n            ' > ''', string(pipeline().parameters.LastLoadValue), ''''\n        )\n    )\n)",
 												"type": "Expression"
 											},
 											"queryTimeout": "02:00:00",
@@ -184,6 +191,23 @@
 								}
 							]
 						}
+					},
+					{
+						"name": "Set variable1",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "debug",
+							"value": {
+								"value": "@concat(\n  'SELECT MAX(', pipeline().parameters.WatermarkColumn, ') AS MaxValue FROM ',\n  pipeline().parameters.TableSchema, '.', pipeline().parameters.TableName\n)",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"policy": {
@@ -205,6 +229,12 @@
 				},
 				"variables": {
 					"var": {
+						"type": "String"
+					},
+					"debudquery": {
+						"type": "String"
+					},
+					"debug": {
 						"type": "String"
 					}
 				},

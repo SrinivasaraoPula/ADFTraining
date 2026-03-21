@@ -260,7 +260,7 @@
 							"value": "@concat(dataset().Tablename,'/',formatDateTime(utcNow(),'yyyy/MM/dd'))",
 							"type": "Expression"
 						},
-						"fileSystem": "SuperStore"
+						"fileSystem": "superstore"
 					},
 					"compressionCodec": "snappy"
 				},
