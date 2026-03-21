@@ -45,6 +45,7 @@
 						"value": "@activity('lookup_sqltable_watermark_dw').output.value",
 						"type": "Expression"
 					},
+					"isSequential": false,
 					"activities": [
 						{
 							"name": "Execute _Sql_Increemental",
