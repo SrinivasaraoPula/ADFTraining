@@ -17,10 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": {
-							"value": "@concat(\n  'SELECT MAX(', pipeline().parameters.WartermarkColumn, ') AS MaxValue FROM ',\n  pipeline().parameters.TableSchema, '.', pipeline().parameters.TableName\n)",
-							"type": "Expression"
-						},
+						"sqlReaderQuery": "SELECT MAX(@{pipeline().parameters.WatermarkColumn}) AS MaxValue\nFROM @{pipeline().parameters.TableSchema}.@{pipeline().parameters.TableName}\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -75,7 +72,7 @@
 								"source": {
 									"type": "SqlServerSource",
 									"sqlReaderQuery": {
-										"value": "@concat('select * from ',pipeline().parameters.TableSchema,'.',pipeline().parameters.TableName,\nif(equals(pipeline().parameters.LastLoadValue,null),'',\nconcat( ' where ',pipeline().parameters.WartermarkColumn,'> ''',pipeline().parameters.LastLoadValue)))",
+										"value": "@concat('select * from ',pipeline().parameters.TableSchema,'.',pipeline().parameters.TableName,\nif(equals(pipeline().parameters.LastLoadValue,null),'',\nconcat( ' where ',pipeline().parameters.WatermarkColumn,'> ''',pipeline().parameters.LastLoadValue)))",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
@@ -160,7 +157,7 @@
 										"type": "Expression"
 									},
 									"WatermarkColumn": {
-										"value": "@pipeline().parameters.WartermarkColumn",
+										"value": "@pipeline().parameters.WatermarkColumn",
 										"type": "Expression"
 									}
 								}
@@ -177,7 +174,7 @@
 			"TableName": {
 				"type": "string"
 			},
-			"WartermarkColumn": {
+			"WatermarkColumn": {
 				"type": "string"
 			},
 			"LastLoadValue": {
