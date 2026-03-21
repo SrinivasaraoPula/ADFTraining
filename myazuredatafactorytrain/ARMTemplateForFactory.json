@@ -198,11 +198,11 @@
 								"referenceName": "ds_lookup_maxvalue",
 								"type": "DatasetReference",
 								"parameters": {
-									"tablename": {
+									"TableName": {
 										"value": "@pipeline().parameters.TableName",
 										"type": "Expression"
 									},
-									"schemaname": {
+									"SchemaName": {
 										"value": "@pipeline().parameters.TableSchema",
 										"type": "Expression"
 									}
@@ -275,11 +275,11 @@
 											"referenceName": "ds_lookup_maxvalue",
 											"type": "DatasetReference",
 											"parameters": {
-												"tablename": {
+												"TableName": {
 													"value": "@pipeline().parameters.TableName",
 													"type": "Expression"
 												},
-												"schemaname": {
+												"SchemaName": {
 													"value": "@pipeline().parameters.TableSchema",
 													"type": "Expression"
 												}
@@ -355,6 +355,11 @@
 					},
 					"LastLoadValue": {
 						"type": "string"
+					}
+				},
+				"variables": {
+					"var": {
+						"type": "String"
 					}
 				},
 				"folder": {
@@ -1120,10 +1125,10 @@
 					"type": "LinkedServiceReference"
 				},
 				"parameters": {
-					"tablename": {
+					"TableName": {
 						"type": "string"
 					},
-					"schemaname": {
+					"SchemaName": {
 						"type": "string"
 					}
 				},
@@ -1132,11 +1137,11 @@
 				"schema": [],
 				"typeProperties": {
 					"schema": {
-						"value": "@dataset().schemaname",
+						"value": "@dataset().SchemaName",
 						"type": "Expression"
 					},
 					"table": {
-						"value": "@dataset().tablename",
+						"value": "@dataset().TableName",
 						"type": "Expression"
 					}
 				}
