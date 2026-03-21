@@ -62,7 +62,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@or(\n  equals(pipeline().parameters.LastLoadValue, null),\n  greater(\n    coalesce(activity('Lookup_maxvalue').output.firstRow.MaxValue, '0'),\n    coalesce(pipeline().parameters.LastLoadValue, '0')\n  )\n)",
+						"value": "@or(equals(pipeline().parameters.LastLoadValue, null), greater(int(activity('Lookup_maxvalue').output.firstRow.MaxValue), int(pipeline().parameters.LastLoadValue)))",
 						"type": "Expression"
 					},
 					"ifTrueActivities": [
@@ -205,7 +205,7 @@
 				"type": "string"
 			},
 			"LastLoadValue": {
-				"type": "int"
+				"type": "string"
 			}
 		},
 		"variables": {
