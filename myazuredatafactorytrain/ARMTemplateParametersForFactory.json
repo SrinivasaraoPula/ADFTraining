@@ -17,6 +17,9 @@
 		"ls_sql_azure_password": {
 			"value": ""
 		},
+		"ls_sql_onprem_password": {
+			"value": ""
+		},
 		"ls_adls_parquet_properties_typeProperties_url": {
 			"value": "https://adlsgen2storgeac.dfs.core.windows.net/"
 		},
@@ -36,6 +39,15 @@
 			"value": "Sample"
 		},
 		"ls_sql_azure_properties_typeProperties_userName": {
+			"value": "srinu"
+		},
+		"ls_sql_onprem_properties_typeProperties_server": {
+			"value": "LAPTOP-0L80BMJ2"
+		},
+		"ls_sql_onprem_properties_typeProperties_database": {
+			"value": "SuperStoreDev"
+		},
+		"ls_sql_onprem_properties_typeProperties_userName": {
 			"value": "srinu"
 		}
 	}
