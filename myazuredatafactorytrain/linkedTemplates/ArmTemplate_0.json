@@ -347,12 +347,25 @@
 					"referenceName": "ls_adls_parquet",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"TableName": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileSystem": "input"
+						"fileName": {
+							"value": "@concat(dataset().TableName,'_',formatDateTime(utcNow(),'yyyyMMddHHmmss'),'.csv')",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@concat(dataset().Tablename,'/',formatDateTime(utcNow(),'yyyy/MM/dd'))",
+							"type": "Expression"
+						},
+						"fileSystem": "superstorecsv"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",

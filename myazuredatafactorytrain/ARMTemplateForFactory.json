@@ -574,14 +574,12 @@
 								"partitionOption": "None"
 							},
 							"sink": {
-								"type": "DelimitedTextSink",
+								"type": "ParquetSink",
 								"storeSettings": {
 									"type": "AzureBlobFSWriteSettings"
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
+									"type": "ParquetWriteSettings"
 								}
 							},
 							"enableStaging": false,
@@ -603,7 +601,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "ds_input_csv",
+								"referenceName": "ds_adls_parquet",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -679,7 +677,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_onprem_sql')]",
-				"[concat(variables('factoryId'), '/datasets/ds_input_csv')]",
+				"[concat(variables('factoryId'), '/datasets/ds_adls_parquet')]",
 				"[concat(variables('factoryId'), '/linkedServices/ls_onprem_sql')]"
 			]
 		},
@@ -875,6 +873,10 @@
 											},
 											"TableName": {
 												"value": "@item().TableName",
+												"type": "Expression"
+											},
+											"WatermarkColumn": {
+												"value": "@item().WatermarkColumn",
 												"type": "Expression"
 											},
 											"LastLoadValue": {
@@ -1114,12 +1116,25 @@
 					"referenceName": "ls_adls_parquet",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"TableName": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileSystem": "input"
+						"fileName": {
+							"value": "@concat(dataset().TableName,'_',formatDateTime(utcNow(),'yyyyMMddHHmmss'),'.csv')",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@concat(dataset().Tablename,'/',formatDateTime(utcNow(),'yyyy/MM/dd'))",
+							"type": "Expression"
+						},
+						"fileSystem": "superstorecsv"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",

@@ -270,14 +270,12 @@
 								"partitionOption": "None"
 							},
 							"sink": {
-								"type": "DelimitedTextSink",
+								"type": "ParquetSink",
 								"storeSettings": {
 									"type": "AzureBlobFSWriteSettings"
 								},
 								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
+									"type": "ParquetWriteSettings"
 								}
 							},
 							"enableStaging": false,
@@ -299,7 +297,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "ds_input_csv",
+								"referenceName": "ds_adls_parquet",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -448,6 +446,10 @@
 											},
 											"TableName": {
 												"value": "@item().TableName",
+												"type": "Expression"
+											},
+											"WatermarkColumn": {
+												"value": "@item().WatermarkColumn",
 												"type": "Expression"
 											},
 											"LastLoadValue": {
