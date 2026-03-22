@@ -70,8 +70,8 @@
 										"value": "@item().TableName",
 										"type": "Expression"
 									},
-									"WarkmarkColumn": {
-										"value": "@item().WarkmarkColumn",
+									"WatermarkColumn": {
+										"value": "@item().WatermarkColumn",
 										"type": "Expression"
 									},
 									"LastLoadValue": {
