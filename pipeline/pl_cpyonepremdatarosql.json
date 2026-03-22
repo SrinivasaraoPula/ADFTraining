@@ -47,7 +47,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_adls_parquetoutput",
+						"referenceName": "ds_adls_parquet",
 						"type": "DatasetReference"
 					}
 				]
